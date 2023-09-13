@@ -1,14 +1,62 @@
 import Menu from "./Menu";
+import Magnetic from "./Magnetic";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { opacity } from "../utils/Animation";
+import { AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <div>
+    <div className="">
+      <AnimatePresence mode="wait">
+        {menuOpen && (
+          <motion.div variants={opacity} initial="initial" animate="openblur" exit="closed" className="absolute opacity-50 backdrop-blur-lg top-0 z-10 h-screen w-screen bg-[#000]"></motion.div>
+        )}
+      </AnimatePresence>
       <header className=" fixed w-full top-0 z-20 ">
         <div className="w-full max-w-8xl mx-auto px-10 py-3 ">
           <nav className="grid grid-cols-3 place-items-center w-full">
-            <button className="bg-accent justify-self-start border border-black rounded-full px-5 py-2 font-denton">
-              menu
-            </button>
+            <Magnetic>
+              <button
+                onClick={toggleMenu}
+                className="bg-accent justify-self-start border border-black rounded-full px-5 font-denton w-24 h-10 relative flex items-center justify-center group"
+              >
+                <motion.p
+                  variants={opacity}
+                  animate={!menuOpen ? "open" : "closed"}
+                  className=" absolute h-fit "
+                >
+                  <div className="relative flex flex-col items-center justify-center">
+                    <span className="group-hover:-translate-y-2 group-hover:opacity-0 transition-all duration-500 ease-in-out absolute">
+                      menu
+                    </span>
+                    <span className="absolute translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                      menu
+                    </span>
+                  </div>
+                </motion.p>
+                <motion.p
+                  variants={opacity}
+                  animate={menuOpen ? "open" : "closed"}
+                  className=" absolute h-fit opacity-0 "
+                >
+                  <div className="relative flex flex-col items-center justify-center">
+                    <span className="group-hover:-translate-y-2 group-hover:opacity-0 transition-all duration-500 ease-in-out absolute">
+                      close
+                    </span>
+                    <span className="absolute translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                      close
+                    </span>
+                  </div>
+                </motion.p>
+              </button>
+            </Magnetic>
             <div className="w-full flex justify-center">
               <a href="">
                 <svg
@@ -31,17 +79,25 @@ export default function Navbar() {
                 </svg>
               </a>
             </div>
-            <div className="justify-self-end  border border-black rounded-full px-8 py-2 font-denton">
-              <a href="">Say Hello!</a>
+            <div className="justify-self-end">
+              <Magnetic>
+                <a
+                  className="border border-black rounded-full px-8 py-3 font-denton group relative flex flex-col"
+                  href=""
+                >
+                  <span className="group-hover:-translate-y-2 group-hover:opacity-0 transition-all duration-300 ease-out">
+                    Say Hello!
+                  </span>
+                  <span className="absolute translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out">
+                    Say Hello!
+                  </span>
+                </a>
+              </Magnetic>
             </div>
           </nav>
         </div>
-
-
       </header>
-      <Menu/>
-      
-      
+      <AnimatePresence mode="wait">{menuOpen && <Menu />}</AnimatePresence>
     </div>
   );
 }
