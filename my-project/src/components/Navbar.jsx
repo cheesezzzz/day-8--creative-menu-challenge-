@@ -2,7 +2,7 @@ import Menu from "./Menu";
 import Magnetic from "./Magnetic";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { opacity } from "../utils/Animation";
+import { opacity } from "../utils/OpacityAnimation";
 import { AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -16,7 +16,7 @@ export default function Navbar() {
     <div className="">
       <AnimatePresence mode="wait">
         {menuOpen && (
-          <motion.div variants={opacity} initial="initial" animate="openblur" exit="closed" className="absolute opacity-50 backdrop-blur-lg top-0 z-10 h-screen w-screen bg-[#000]"></motion.div>
+          <motion.div variants={opacity} initial="initial" animate="openblur" exit="closed" className="absolute opacity-50 top-0 z-10 h-screen w-screen bg-[#000]"></motion.div>
         )}
       </AnimatePresence>
       <header className=" fixed w-full top-0 z-20 ">
@@ -27,7 +27,7 @@ export default function Navbar() {
                 onClick={toggleMenu}
                 className="bg-accent justify-self-start border border-black rounded-full px-5 font-denton w-24 h-10 relative flex items-center justify-center group"
               >
-                <motion.p
+                <motion.div
                   variants={opacity}
                   animate={!menuOpen ? "open" : "closed"}
                   className=" absolute h-fit "
@@ -36,12 +36,12 @@ export default function Navbar() {
                     <span className="group-hover:-translate-y-2 group-hover:opacity-0 transition-all duration-500 ease-in-out absolute">
                       menu
                     </span>
-                    <span className="absolute translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                    <span className="absolute translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
                       menu
                     </span>
                   </div>
-                </motion.p>
-                <motion.p
+                </motion.div>
+                <motion.div
                   variants={opacity}
                   animate={menuOpen ? "open" : "closed"}
                   className=" absolute h-fit opacity-0 "
@@ -54,7 +54,7 @@ export default function Navbar() {
                       close
                     </span>
                   </div>
-                </motion.p>
+                </motion.div>
               </button>
             </Magnetic>
             <div className="w-full flex justify-center">

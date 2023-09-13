@@ -37,7 +37,7 @@ export default function Magnetic({children}) {
         ref={ref}
         className="justify-self-start"
         animate={{x, y}}
-        transition={{type: "spring", stiffness: 50 }}
+        transition={{type: "spring", stiffness: 30 }}
         >
             {children}
         </motion.div>
