@@ -4,7 +4,7 @@ export const opacity = {
     },
     open: {
         opacity: 1,
-        transition: {duration: 0.20}
+        transition: {duration: 0.20, delay: 0.9}
     },
     openblur: {
         opacity: 0.5,
