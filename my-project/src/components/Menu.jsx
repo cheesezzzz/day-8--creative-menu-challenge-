@@ -3,6 +3,13 @@ import { menuAnimation } from "../utils/MenuAnimation";
 import { masking, translate, staggerContainer, width } from "../utils/MenuNav";
 import { opacity } from "../utils/OpacityAnimation";
 import { PiArrowRightLight } from "react-icons/pi";
+import {
+  AiFillLinkedin,
+  AiFillYoutube,
+  AiFillInstagram,
+  AiFillGithub,
+} from "react-icons/ai";
+import { SiBento } from "react-icons/si";
 import { useState, useEffect } from "react";
 
 export default function Menu() {
@@ -11,10 +18,10 @@ export default function Menu() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((currentImage + 1) % imgs.length);
-    }, 1200);
+    }, 1600);
 
     return () => clearInterval(interval);
-  }, []);
+  });
 
   const imgs = [
     {
@@ -60,17 +67,17 @@ export default function Menu() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className=" z-10 top-0 fixed h-fit w-screen bg-[#FFF9F0] font-denton "
+      className=" z-10 top-0 fixed  w-screen bg-[#FFF9F0] font-denton "
     >
       <div className=" border-t border-black mt-20 py-10">
-        <div className="grid grid-cols-10 px-10 grid-rows-2 h-full gap-7">
+        <div className="grid grid-cols-10 px-10 gap-7">
           {/* Navigation */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="show"
             exit="exit"
-            className="col-span-4 row-span-2 flex flex-col gap-y-5"
+            className="lg:col-span-4 row-span-2 flex flex-col gap-y-6"
           >
             {links.map((link, index) => {
               return (
@@ -87,10 +94,10 @@ export default function Menu() {
                     href={link.href}
                     className="flex justify-between items-center group"
                   >
-                    <span className="group-hover:translate-x-3 transition-all duration-300 ease-[cubic-bezier(0.22, 1, 0.36, 1)]">
+                    <span className="group-hover:translate-x-4 transition-all duration-200 ease-[cubic-bezier(0.22, 1, 0.36, 1)]">
                       {link.label}
                     </span>
-                    <PiArrowRightLight className="group-hover:-translate-x-3 transition-all duration-300 ease-[cubic-bezier(0.22, 1, 0.36, 1)]" />
+                    <PiArrowRightLight className="group-hover:-translate-x-4 transition-all duration-200 ease-[cubic-bezier(0.22, 1, 0.36, 1)]" />
                   </motion.a>
                   <motion.div
                     variants={width}
@@ -105,10 +112,18 @@ export default function Menu() {
           </motion.div>
 
           {/* News Insight */}
-          <motion.a variants={opacity} initial="initial" animate="open" exit="closed" href="" className="col-span-6 flex gap-x-6">
-            <div className="relative overflow-hidden h-40 w-72 flex-shrink-0">
+          <motion.a
+            variants={opacity}
+            initial="initial"
+            animate="open"
+            exit="closed"
+            href=""
+            className="col-span-6 flex gap-x-6"
+          >
+            <div className="relative overflow-hidden h-40 w-72 flex-shrink-0 rounded">
               {imgs.map((img, index) => {
                 const isActive = currentImage === index;
+
                 return (
                   <img
                     key={index}
@@ -139,15 +154,56 @@ export default function Menu() {
           </motion.a>
 
           {/* Socials */}
-          <motion.div variants={opacity} initial="initial" animate="open" exit="closed" className="col-span-3 font-semibold text-lg">
+          <motion.div
+            variants={opacity}
+            initial="initial"
+            animate="open"
+            exit="closed"
+            className="col-span-3 font-semibold text-lg flex flex-col gap-y-4"
+          >
             <p>Follow me on social media</p>
-            <div className="flex">
-
+            <div className="flex gap-x-7">
+              <a href="https://www.instagram.com/huyngxyz/">
+                <AiFillInstagram opacity="90%" color="#342D32" size={28} />
+              </a>
+              <a href="https://www.linkedin.com/in/huyngxyz">
+                <AiFillLinkedin opacity="90%" color="#342D32" size={28} />
+              </a>
+              <a href="https://github.com/huyngxyz">
+                <AiFillGithub opacity="90%" color="#342D32" size={28} />
+              </a>
+              <a href="https://www.youtube.com/channel/UCBOAB9RV647G93GxLhEXleA">
+                <AiFillYoutube opacity="90%" color="#342D32" size={28} />
+              </a>
+              <a href="https://www.bento.me/huyng">
+                <SiBento opacity="90%" color="#342D32" size={28} />
+              </a>
             </div>
-           </motion.div>
+          </motion.div>
 
           {/* Newsletter */}
-          <motion.div variants={opacity} initial="initial" animate="open" exit="closed" className="col-span-3">Join the Newsletter</motion.div>
+          <motion.div
+            variants={opacity}
+            initial="initial"
+            animate="open"
+            exit="closed"
+            className="col-span-3 flex flex-col justify-between"
+          >
+            <span className=" font-bold text-lg">Join the Newsletter</span>
+            <form action="">
+              <div className="relative">
+
+                <button className="absolute right-2 px-3 py-1 bg-accent border border-black rounded">
+                  <PiArrowRightLight />
+                </button>
+                <input
+                  className="pb-2 px-1 w-full bg-transparent border-b focus:outline-none border-black font-cabinet font-light text-sm"
+                  type="text"
+                  placeholder="enter your email here"
+                />
+              </div>
+            </form>
+          </motion.div>
         </div>
       </div>
     </motion.div>
